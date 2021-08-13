@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/drawable/gradient.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/activity_main.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/item_unsplash_photo.xml" value="0.2755208333333333" />
       </map>
     </option>
   </component>
