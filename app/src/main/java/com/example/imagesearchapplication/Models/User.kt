@@ -2,7 +2,9 @@ package com.example.imagesearchapplication.Models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName("first_name") @Expose val first_name: String,
     @SerializedName("id") @Expose val id: String,

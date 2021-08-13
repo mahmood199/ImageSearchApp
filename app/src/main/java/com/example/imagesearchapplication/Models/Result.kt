@@ -2,7 +2,9 @@ package com.example.imagesearchapplication.Models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Result(
     @SerializedName("blur_hash") @Expose val blur_hash: String,
     @SerializedName("color") @Expose val color: String,

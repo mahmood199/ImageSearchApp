@@ -2,7 +2,9 @@ package com.example.imagesearchapplication.Models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Urls(
     @SerializedName("full") @Expose val full: String,
     @SerializedName("raw") @Expose val raw: String,
