@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class Root(
     @SerializedName("results") @Expose val results: List<Result>,
     @SerializedName("total") @Expose val total: Int,

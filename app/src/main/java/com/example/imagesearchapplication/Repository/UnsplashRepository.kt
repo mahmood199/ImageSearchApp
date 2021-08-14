@@ -13,7 +13,7 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
         Pager(
             config = PagingConfig(
                 pageSize = 20,
-                maxSize = 40,
+                maxSize = 100,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
