@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/drawable/gradient.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/drawable/search.xml" value="0.2916666666666667" />
+        <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/activity_details.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/activity_main.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/fragment_details.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/fragment_gallery.xml" value="0.26197916666666665" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/item_unsplash_photo.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Kamran/Desktop/ImageSearchApplication/app/src/main/res/layout/menu_gallery.xml" value="0.2755208333333333" />

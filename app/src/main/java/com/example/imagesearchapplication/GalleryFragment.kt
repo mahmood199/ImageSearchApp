@@ -1,22 +1,27 @@
 package com.example.imagesearchapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.databinding.adapters.SearchViewBindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imagesearchapplication.Adapters.UnsplashPhotoAdapter
 import com.example.imagesearchapplication.Adapters.UnsplashPhotoLoadStateAdapter
+import com.example.imagesearchapplication.Models.Result
 import com.example.imagesearchapplication.ViewModel.GalleryViewModel
 import com.example.imagesearchapplication.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+class GalleryFragment : Fragment(R.layout.fragment_gallery),UnsplashPhotoAdapter.OnItemClickListener  {
 
     private val viewModel by viewModels<GalleryViewModel> ()
 
@@ -39,19 +44,47 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         _binding = FragmentGalleryBinding.bind(view)
 
 
-        val adapter = UnsplashPhotoAdapter()
+        val adapter = UnsplashPhotoAdapter(this)
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
+            recyclerView.itemAnimator = null
             recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = UnsplashPhotoLoadStateAdapter{ adapter.retry() },
                 footer = UnsplashPhotoLoadStateAdapter{ adapter.retry() }
             )
+
+            buttonRetry.setOnClickListener {
+                adapter.retry()
+            }
+
         }
 
         viewModel.photos.observe(viewLifecycleOwner, Observer {
             adapter.submitData(viewLifecycleOwner.lifecycle,it)
         })
+
+
+        adapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                if(loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    adapter.itemCount<1)
+                {
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                }
+                else{
+                    textViewEmpty.isVisible = false
+                }
+            }
+        }
+
         setHasOptionsMenu(true)
 
     }
@@ -84,6 +117,13 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             }
         })
 
+    }
+
+    override fun onItemClick(result: Result) {
+        val intent = Intent(context,DetailsActivity::class.java)
+        intent.putExtra("PHOTO_LINK",result.urls.regular)
+        intent.putExtra("CREATOR_NAME",result.user.first_name)
+        startActivity(intent)
     }
 
 }

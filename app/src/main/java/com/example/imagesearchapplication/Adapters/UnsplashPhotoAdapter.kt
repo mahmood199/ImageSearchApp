@@ -12,7 +12,7 @@ import com.example.imagesearchapplication.R
 import com.example.imagesearchapplication.databinding.ItemUnsplashPhotoBinding
 
 
-class UnsplashPhotoAdapter :
+class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<Result, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
 
@@ -32,8 +32,23 @@ class UnsplashPhotoAdapter :
 
     }
 
-    class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
+    inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
+        init {
+            binding.root.setOnClickListener {
+
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION)
+                {
+                    val item = getItem(position)
+                    if(item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
 
 
         fun bind(result: Result) {
@@ -50,6 +65,12 @@ class UnsplashPhotoAdapter :
             }
         }
     }
+
+
+    interface OnItemClickListener {
+        fun onItemClick(result: Result)
+    }
+
 
     companion object {
         private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<Result>() {
