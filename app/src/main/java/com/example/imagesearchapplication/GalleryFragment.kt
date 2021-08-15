@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imagesearchapplication.Adapters.UnsplashPhotoAdapter
+import com.example.imagesearchapplication.Adapters.UnsplashPhotoLoadStateAdapter
 import com.example.imagesearchapplication.ViewModel.GalleryViewModel
 import com.example.imagesearchapplication.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
-            recyclerView.adapter = adapter
+            recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = UnsplashPhotoLoadStateAdapter{ adapter.retry() },
+                footer = UnsplashPhotoLoadStateAdapter{ adapter.retry() }
+            )
         }
 
         viewModel.photos.observe(viewLifecycleOwner, Observer {
